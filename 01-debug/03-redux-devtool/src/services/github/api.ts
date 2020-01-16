@@ -32,18 +32,18 @@ export const getMembersFactory = (optionConfig?: ApiConfig) => {
   const instance = createAxiosInstance(optionConfig);
 
   const getMembers = async (organizationName: string) => {
-    try {
-      const response = await instance.get(`/orgs/${organizationName}/members`);
+    // try {
+    const response = await instance.get(`/orgs/${organizationName}/members`);
 
-      if (response.status !== 200) {
-        throw new Error('Server Error');
-      }
-      const members: User[] = response.data;
-
-      return members;
-    } catch (err) {
-      throw err;
+    if (response.status !== 200) {
+      throw new Error('Server Error');
     }
+    const members: User[] = response.data;
+
+    return members;
+    // } catch (err) {
+    //   throw err;
+    // }
   };
 
   return getMembers;
@@ -56,19 +56,19 @@ export const searchRepositoriesFactory = (optionConfig?: ApiConfig) => {
     q: string,
     sort?: 'stars' | 'forks' | 'updated' | '',
   ) => {
-    try {
-      const params = qs.stringify({ q, sort });
-      const response = await instance.get(`/search/repositories?${params}`);
+    // try {
+    const params = qs.stringify({ q, sort });
+    const response = await instance.get(`/search/repositories?${params}`);
 
-      if (response.status !== 200) {
-        throw new Error('Server Error');
-      }
-      const repositories: Repository[] = response.data.items;
-
-      return repositories;
-    } catch (err) {
-      throw err;
+    if (response.status !== 200) {
+      throw new Error('Server Error');
     }
+    const repositories: Repository[] = response.data.items;
+
+    return repositories;
+    // } catch (err) {
+    //   throw err;
+    // }
   };
 
   return searchRepositories;
